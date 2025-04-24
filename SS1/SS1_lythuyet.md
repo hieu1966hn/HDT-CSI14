@@ -12,7 +12,7 @@ Buổi 1: Thế giới AI
 Dự án gồm những tính năng:
 - Phần mềm web streamlit
 - Ứng dụng web
-- Ứng dụng desktop
+- Ứng dụng desktopê
 
 AI xuất hiện ở đâu? Dưới hình thức nào?
 - lĩnh vực robot
