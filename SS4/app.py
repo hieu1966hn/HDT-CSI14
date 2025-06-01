@@ -24,6 +24,7 @@ def preprocess_PIL(pil_img, input_size=(128, 128)):
     return img_generator
 
 def main():
+    # hàm Load mô hình có caching để không load lại mỗi lần chạy
     @st.cache_resource
     def load_asl_model(model_path='model.keras'):
         try:
@@ -44,11 +45,11 @@ def main():
             image = Image.open(uploaded_file)
             st.image(image, caption='Uploaded Image.', use_column_width=True) # PIL object
             if st.button("Classify"):
-                img_gen = preprocess_PIL(image)
-                predictions = model.predict(next(img_gen))
-                prediction_idx = np.argmax(predictions)
-                predicted_label = labels[prediction_idx]
-                confidence = np.max(predictions)
+                img_gen = preprocess_PIL(image) # Tiền xử lý ảnh
+                predictions = model.predict(next(img_gen)) # Dự đoán bằng mô hình
+                prediction_idx = np.argmax(predictions)     # lấy index của lớp có xác suất cao nhất
+                predicted_label = labels[prediction_idx]    # Tra nhãn tương ứng
+                confidence = np.max(predictions)            # Lấy xác suất cao nhất
                 st.write(f"**Prediction:** {predicted_label} with {confidence*100:.2f}% confidence.")
                 
     elif option == "Use Webcam":
